@@ -1,0 +1,54 @@
+# Artigo e imagens do artigo
+artigo-arquitetura-ai-native-saas-rag-agentes-java-localstack.md
+artigo-*.md
+capa-*.jpg
+capa-*.png
+infografico-*.jpg
+infografico-*.png
+*.jpg
+*.png
+
+# Build / Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Java / Logs
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# IDEs e editores
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+.sts4-cache/
+
+# Ambiente e Sistema Operacional
+.env
+.env.*
+docker-compose.bedrock-aws.yml
+.localstack/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+target/
+.git/
+.idea/
+.vscode/
+.env
+.env.*
+docker-compose.bedrock-aws.yml
+*.md
+*.jpg
+*.png

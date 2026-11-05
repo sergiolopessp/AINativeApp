@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: ai-native-saas
+  threads:
+    virtual:
+      enabled: true # Ideal no Java 25 para chamadas bloqueantes de LLM e VectorStore
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ainative}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+  ai:
+    model:
+      embedding: bedrock-titan
+    bedrock:
+      aws:
+        region: ${SPRING_AI_BEDROCK_AWS_REGION:us-east-1}
+        timeout: 30s
+      converse:
+        chat:
+          options:
+            # Modelo padrão no Amazon Bedrock (Cross-Region Inference Profile - Claude Sonnet 4.5)
+            model: ${BEDROCK_CAPABLE_AGENT_MODEL:us.anthropic.claude-sonnet-4-5-20250929-v1:0}
+            temperature: 0.1
+            max-tokens: 1024
+      titan:
+        embedding:
+          enabled: true
+          model: ${BEDROCK_EMBEDDING_MODEL:amazon.titan-embed-text-v2:0}
+          input-type: TEXT
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1024 # Dimensão nativa do Amazon Titan Text Embeddings V2
+
+app:
+  ai:
+    local-bedrock-emulator: ${APP_AI_LOCAL_BEDROCK_EMULATOR:true}
+    models:
+      fast: ${BEDROCK_FAST_MODEL:us.amazon.nova-micro-v1:0}
+      capable: ${BEDROCK_CAPABLE_AGENT_MODEL:us.anthropic.claude-sonnet-4-5-20250929-v1:0}
+  aws:
+    endpoint: ${AWS_ENDPOINT_OVERRIDE:http://localhost:4566}
+    region: ${AWS_REGION:us-east-1}
+    audit-table: ${AUDIT_TABLE_NAME:AppAiAuditTrail}
+    approval-queue-url: ${APPROVAL_QUEUE_URL:http://localhost:4566/000000000000/agent-hitl-approval-queue}
